@@ -308,3 +308,28 @@ set showcmd		" 显示输入的命令
 
 set foldenable	" 允许折叠
 set foldmethod=manual	" 手动折叠
+
+" 调用Keil进行编译下载
+function MakeKeilTarget(options)
+    let l:target = ''
+ 
+    if !empty(glob('*.uvprojx'))
+        let l:target =  glob('*.uvprojx')
+    elseif !empty(glob('../../*.uvprojx'))
+        let l:target =  glob('../../*.uvprojx')
+    elseif !empty(glob('../Project/*.uvprojx'))
+        let l:target =  glob('../Project/*.uvprojx')
+	endif
+ 
+    if !empty(l:target)
+        execute ':silent !uv4 '.a:options.l:target.' -o "\%TEMP\%/mdk_log.txt"'
+        "execute ':!uv4 '.a:options.l:target.' -o "\%TEMP\%/mdk_log.txt" && type "\%TEMP\%\mdk_log.txt" && pause'
+		execute ':silent !type "\%TEMP\%\mdk_log.txt" && pause'
+    else
+        echo 'Target not found!'
+    endif
+endfunction
+nnoremap <leader>kb :call MakeKeilTarget('-b ')<CR>
+"nnoremap <leader>kr :call MakeKeilTarget('-b -z ')<CR>
+nnoremap <leader>kr :call MakeKeilTarget('-cr ')<CR>
+nnoremap <leader>kd :call MakeKeilTarget('-f ')<CR>
