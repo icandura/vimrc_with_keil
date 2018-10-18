@@ -61,6 +61,8 @@
 
 　　亦可参照 Keil 官方的[命令行使用说明](http://www.keil.com/support/man/docs/uv4/uv4_commandline.htm)来自行增加其他功能和改进，比如编译时不让 Keil 弹出UI界面、建立新项目等等。
 
+![image](https://github.com/icandura/vimrc_with_keil/raw/master/rebuild.png)
+
 ### 参考文档
 
 1. [本博使用的vim(gvim)相关插件整理](http://www.vimer.cn/archives/1372.html) 
